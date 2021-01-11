@@ -1,0 +1,4 @@
+/dist-*.zip
+/dist
+/custom.scss
+!/custom.scss.sample

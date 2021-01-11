@@ -1,0 +1,24 @@
+{
+  "name": "bootstrap",
+  "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+  "scripts": {
+    "get": "test -e bootstrap || git clone https://github.com/twbs/bootstrap",
+    "update": "test -e bootstrap && cd ./bootstrap && git pull",
+    "setup": "npm install && cd ./bootstrap && npm install",
+
+    "build-css": "node-sass ./scss/bootstrap.scss -o ./bootstrap/dist/css/ && npm run bootstrap-scripts",
+    "bootstrap-scripts": "cd ./bootstrap && npm-run-all css-prefix css-rtl css-minify",
+
+    "build-js": "cd ./bootstrap && npm-run-all js",
+
+    "copy-dist-css": "mkdir -p dist/css && cp ./bootstrap/dist/css/* ./dist/css",
+    "copy-dist-js": "mkdir -p dist/js && cp ./bootstrap/dist/js/* ./dist/js",
+    "copy-dist": "npm-run-all copy-dist-css copy-dist-js",
+
+    "dist": "npm-run-all build-css build-js copy-dist",
+    "complete": "npm run get && npm run setup && npm run dist"
+  },
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

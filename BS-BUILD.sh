@@ -12,9 +12,15 @@ fi
 docker start bsdev
 
 # Update customizations and recompile changes
+docker exec -ti -w /home/bootstrap/bootstrap/bootstrap bsdev bash -c "git reset --hard"
+docker exec -ti -w /home/bootstrap/bootstrap/bootstrap bsdev bash -c "git pull --no-rebase"
+
+# Update the 'starter' custom files
 docker cp ./bootstrap.scss bsdev:/home/bootstrap/bootstrap/scss/bootstrap.scss
 docker cp ./custom.scss bsdev:/home/bootstrap/bootstrap/scss/custom.scss
-docker exec -ti -w /home/bootstrap/bootstrap/bootstrap bsdev bash -c "git pull --no-rebase"
+docker cp ./package.json bsdev:/home/bootstrap/bootstrap/package.json
+
+docker exec -ti -w /home/bootstrap/bootstrap bsdev bash -c "git checkout tags/v5.0.2"
 docker exec -ti -w /home/bootstrap/bootstrap bsdev bash -c "npm run dist"
 
 # Export Files to Host

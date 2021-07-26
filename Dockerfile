@@ -4,7 +4,7 @@ FROM debian:bullseye-slim
 # Download NODE and GIT
 RUN apt-get clean && apt-get -y update && \
     apt-get install -y locales curl && locale-gen en_CA.UTF-8 && \
-    curl -sL https://deb.nodesource.com/setup_15.x | bash - && \
+    curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get install -y nodejs && \
     apt-get install -y vim git && \
     apt-get clean
